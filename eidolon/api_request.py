@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 import inspect
 import logging
 import time
-from typing import Callable, Dict, Literal
+from typing import Awaitable, Callable, Dict, Literal, Optional, Union
 import aiohttp
 from yarl import URL
 
@@ -16,16 +16,15 @@ class APIRequest:
 
     task_id: int
     attempts_left: int
-    result: list = field(default_factory=list)
-    callback: Callable[[dict, dict], None] = None
+    callback: Callable[[dict, dict], Awaitable[None]] = None
     request_method: Literal[
         "GET", "POST", "HEAD", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
-    ] = None
-    request_headers: Dict[str, str] | None = None
-    request_json: dict | None = None
-    request_params: dict | None = None
-    request_form_data: aiohttp.FormData | dict | bytes | None = None
-    request_url: str | URL = None
+    ] = "GET"
+    request_headers: Optional[Dict[str, str]] = None
+    request_json: Optional[dict] = None
+    request_params: Optional[dict] = None
+    request_form_data: Optional[Union[aiohttp.FormData, dict, bytes]]  = None
+    request_url: Optional[Union[str, URL]] = None
 
     async def call_api(
         self,
@@ -50,7 +49,6 @@ class APIRequest:
                         error = True
                     
                     if error:
-                        self.result.append(error)
                         if self.attempts_left:
                             retry_queue.put_nowait(self)
                         else:

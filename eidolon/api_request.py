@@ -7,7 +7,7 @@ from typing import Callable, Dict, Literal
 import aiohttp
 from yarl import URL
 
-from parallelizer.tracker import StatusTracker
+from eidolon.tracker import StatusTracker
 
 
 @dataclass

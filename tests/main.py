@@ -1,7 +1,7 @@
 import asyncio
 import logging
-from parallelizer import Parallelizer
-from parallelizer.api_request import APIRequest
+from eidolon import Parallelizer
+from eidolon.api_request import APIRequest
 
 async def callback(request, response):
     print(response.status)

@@ -3,9 +3,9 @@ import asyncio
 import logging
 import time
 from typing import Generator, Iterable
-from parallelizer.api_request import APIRequest
+from eidolon.api_request import APIRequest
 
-from parallelizer.tracker import StatusTracker
+from eidolon.tracker import StatusTracker
 
 def _task_id_generator_function():
     """Generate integers 0, 1, 2, and so on."""

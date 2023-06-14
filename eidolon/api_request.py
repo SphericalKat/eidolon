@@ -39,6 +39,9 @@ class APIRequest:
                 async with session.request(
                     method=self.request_method,
                     url=self.request_url,
+                    params=self.request_params,
+                    headers=self.request_headers,
+                    json=self.request_json,
                 ) as response:
                     if response.status == 429:
                         logging.warning(

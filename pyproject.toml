@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "eidolon"
-version = "0.1.3"
+version = "0.1.4"
 description = "A utility to concurrently make HTTP requests, with an optional rate limit. Powered by asyncio and aiohttp"
 authors = ["Sphericalkat <amolele@gmail.com>"]
 license = "MIT"
